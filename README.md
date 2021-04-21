@@ -1,4 +1,4 @@
-# Dockerfiles for generating Docker images of historical TeX Live archives
+# Dockerfiles for generating Docker images on M1 Mac of historical TeX Live archives
 
 This repository contains Dockerfiles for generating Docker images of the following historical TeX Live archives.
 
@@ -10,38 +10,44 @@ This repository contains Dockerfiles for generating Docker images of the followi
 * TeX Live 2017 (frozen)
 * TeX Live 2018 (frozen)
 * TeX Live 2019 (frozen)
+* TeX Live 2020 (frozen)
 
-## Features 
+## Original repositry
 
-### IPAex font embedding (for Japanese users)
+https://github.com/doraTeX/Docker-TLarchive
+
+### More informations (in Japanese)
+
+- https://qiita.com/doraTeX/items/51c219799a9292daa32d
+- https://qiita.com/doraTeX/items/f40f9597763ca63daabb
+
+## Features
+
+### IPAex font embedding in before TL2018 (for Japanese users)
 
 In all of the above Docker images, the setting to embed IPAex fonts using `(u)pLaTeX` + `dvipdfmx`/`dvips` has already been applied.
 
-### `llmk` included
+## How to built images
 
-Besides TeX Live, as a new-generation build tool for LaTeX documents, [`llmk`](https://github.com/wtsnjp/llmk) is deployed in `/usr/local/bin` (for TeX Live 2013 or later).
-
-## How to use the built images on Docker Hub
-
-The built images are available in [a Docker Hub repository](https://hub.docker.com/repository/docker/doratex/tlarchive). These archives are distinguished by their tags there. You can pull and use each of them like this.
+You can use each of them like this.
 
 ```sh
-$ docker pull doratex/tlarchive:2019frozen
-$ alias tl2019="docker run --rm \
+docker build --no-cache=true -t texlive2020frozen .
+```
+
+## How to use the built images
+
+You can use each of them like this.
+
+```sh
+$ alias tl2020="docker run --rm \
   --mount type=bind,src=\"\$(pwd)\",dst=/workdir \
-  --mount type=volume,src=ltfontcache,dst=/usr/local/texlive/2015/texmf-var/luatex-cache/generic/fonts/otl \
-  doratex/tlarchive:2019frozen"
-$ tl2019 pdflatex foobar.tex
+  --mount type=volume,src=ltfontcache,dst=/usr/local/texlive/2020/texmf-var/luatex-cache/generic/fonts/otl \
+  doratex/tlarchive:2020frozen"
+$ tl2020 pdflatex foobar.tex
 ```
 
-In this example, `foobar.tex` in the current directory is compiled by pdfLaTeX included in the Docker container of TeX Live 2019.
-
-If you omit any arguments, `llmk` is launched and builds documents in accordance with the procedures prescribed in `llmk.toml`.
-
-```sh
-# build automatically with llmk
-$ tl2019
-```
+In this example, `foobar.tex` in the current directory is compiled by pdfLaTeX included in the Docker container of TeX Live 2020.
 
 # LICENSE
 
