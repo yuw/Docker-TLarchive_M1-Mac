@@ -1,12 +1,12 @@
 FROM ubuntu:20.04
 
-LABEL maintainer="doraTeX <taylorkgb [at] gmail.com>"
+LABEL maintainer="Yuwsuke Kieda <p.typog [at] gmail.com>"
 
 ENV TL_VERSION       2020
 ENV TL_PATH          /usr/local/texlive
 ENV TEXMF_LOCAL_PATH ${TL_PATH}/texmf-local
 ENV TEXMF_DIST_PATH  ${TL_PATH}/texmf-dist
-ENV PATH             ${TL_PATH}/bin/x86_64-linux:/bin:${PATH}
+ENV PATH             ${TL_PATH}/bin/aarch64-linux:/bin:$PATH
 
 WORKDIR /tmp
 
@@ -40,9 +40,8 @@ RUN mkdir install-tl-unx && \
       -profile ./install-tl-unx/texlive.profile && \
     rm -rf *
 
-# Set up fonts
 RUN \
-    # Set up CJK fonts for Ghostscript
+# Set up CJK fonts for Ghostscript
       git clone https://github.com/texjporg/cjk-gs-support.git && \
       ( cd cjk-gs-support && \
         ./cjk-gs-integrate.pl --cleanup --force && \
@@ -69,4 +68,4 @@ VOLUME ["/usr/local/texlive/${TL_VERSION}/texmf-var/luatex-cache/generic/fonts/o
 
 WORKDIR /workdir
 
-CMD ["llmk"]
+CMD ["/bin/zsh"]
