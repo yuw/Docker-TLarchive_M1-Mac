@@ -2,11 +2,6 @@
 
 This repository contains Dockerfiles for generating Docker images of the following historical TeX Live archives.
 
-* TeX Live 2012 (frozen)
-* TeX Live 2013 (frozen)
-* TeX Live 2014 (frozen)
-* TeX Live 2015 (frozen)
-* TeX Live 2016 (frozen)
 * TeX Live 2017 (frozen)
 * TeX Live 2018 (frozen)
 * TeX Live 2019 (frozen)
@@ -23,7 +18,7 @@ https://github.com/doraTeX/Docker-TLarchive
 
 ## Features
 
-### IPAex font embedding in before TL2018 (for Japanese users)
+### IPAex font embedding in TL2017 and TL2018 (for Japanese users)
 
 In all of the above Docker images, the setting to embed IPAex fonts using `(u)pLaTeX` + `dvipdfmx`/`dvips` has already been applied.
 
