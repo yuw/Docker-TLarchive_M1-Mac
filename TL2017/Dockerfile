@@ -1,12 +1,12 @@
 FROM ubuntu:18.04
 
-LABEL maintainer="doraTeX <taylorkgb [at] gmail.com>"
+LABEL maintainer="Yuwsuke Kieda <p.typog [at] gmail.com>"
 
 ENV TL_VERSION       2017
 ENV TL_PATH          /usr/local/texlive
 ENV TEXMF_LOCAL_PATH ${TL_PATH}/texmf-local
 ENV TEXMF_DIST_PATH  ${TL_PATH}/texmf-dist
-ENV PATH             ${TL_PATH}/bin/x86_64-linux:/bin:${PATH}
+ENV PATH             ${TL_PATH}/bin/aarch64-linux:/bin:${PATH}
 
 WORKDIR /tmp
 
@@ -40,7 +40,7 @@ RUN mkdir install-tl-unx && \
       -profile ./install-tl-unx/texlive.profile && \
     rm -rf *
 
-# Set up fonts and llmk
+# Set up fonts
 RUN \
     # Set up CJK fonts for Ghostscript
       git clone https://github.com/texjporg/cjk-gs-support.git && \
@@ -65,13 +65,10 @@ RUN \
           "<dir>${TEXMF_LOCAL_PATH}/fonts/truetype</dir>" \
         "</fontconfig>" \
         > /etc/fonts/local.conf && \
-      fc-cache -r && \
-    # Install llmk
-      wget -q -O /usr/local/bin/llmk https://raw.githubusercontent.com/wtsnjp/llmk/master/llmk.lua && \
-      chmod +x /usr/local/bin/llmk
+      fc-cache -r
 
 VOLUME ["/usr/local/texlive/${TL_VERSION}/texmf-var/luatex-cache/generic/fonts/otl"]
 
 WORKDIR /workdir
 
-CMD ["llmk"]
+CMD ["/bin/zsh"]
