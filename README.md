@@ -38,7 +38,7 @@ You can use each of them like this.
 $ alias tl2020="docker run --rm \
   --mount type=bind,src=\"\$(pwd)\",dst=/workdir \
   --mount type=volume,src=ltfontcache,dst=/usr/local/texlive/2020/texmf-var/luatex-cache/generic/fonts/otl \
-  doratex/tlarchive:2020frozen"
+  texlive2020frozen"
 $ tl2020 pdflatex foobar.tex
 ```
 
