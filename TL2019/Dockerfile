@@ -8,6 +8,8 @@ ENV TEXMF_LOCAL_PATH ${TL_PATH}/texmf-local
 ENV TEXMF_DIST_PATH  ${TL_PATH}/texmf-dist
 ENV PATH             ${TL_PATH}/bin/aarch64-linux:/bin:${PATH}
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 WORKDIR /tmp
 
 # Install required packages
@@ -19,11 +21,15 @@ RUN apt update && \
     # for tlmgr
     perl-modules-5.26 \
     # for XeTeX
-    fontconfig && \
+    fontconfig \
+    # for time zone
+    tzdata && \
     # Clean caches
     apt autoremove -y && \
     apt clean && \
     rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+
+ENV TZ Asia/Tokyo
 
 # Install TeX Live
 RUN mkdir install-tl-unx && \
