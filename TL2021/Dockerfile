@@ -24,6 +24,7 @@ RUN apt update && \
     fontconfig \
     # for time zone
     tzdata && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     # Clean caches
     apt autoremove -y && \
     apt clean && \
