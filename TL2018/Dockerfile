@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 LABEL maintainer="Yuwsuke Kieda <p.typog [at] gmail.com>"
 
@@ -19,11 +19,12 @@ RUN apt update && \
     # Basic tools
     wget unzip git ghostscript \
     # for tlmgr
-    perl-modules-5.26 \
+    perl-modules-5.30 \
     # for XeTeX
     fontconfig \
     # for time zone
     tzdata && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     # Clean caches
     apt autoremove -y && \
     apt clean && \
