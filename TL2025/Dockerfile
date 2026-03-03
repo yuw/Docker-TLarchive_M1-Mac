@@ -2,11 +2,11 @@ FROM ubuntu:24.04
 
 LABEL maintainer="Yuwsuke Kieda <yuw [at] seikando.info>"
 
-ENV TL_VERSION       2025
-ENV TL_PATH          /usr/local/texlive
-ENV TEXMF_LOCAL_PATH ${TL_PATH}/texmf-local
-ENV TEXMF_DIST_PATH  ${TL_PATH}/texmf-dist
-ENV PATH             ${TL_PATH}/bin/aarch64-linux:/bin:$PATH
+ENV TL_VERSION=2025
+ENV TL_PATH=/usr/local/texlive
+ENV TEXMF_LOCAL_PATH=${TL_PATH}/texmf-local
+ENV TEXMF_DIST_PATH=${TL_PATH}/texmf-dist
+ENV PATH=${TL_PATH}/bin/aarch64-linux:/bin:$PATH
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -30,7 +30,7 @@ RUN apt update && \
     apt clean && \
     rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-ENV TZ Asia/Tokyo
+ENV TZ=Asia/Tokyo
 
 # Install TeX Live
 RUN mkdir install-tl-unx && \
